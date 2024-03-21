@@ -1,0 +1,70 @@
+<!doctype HTML>
+<html>
+  <head>
+    <title>EasyPulsa: Yang simple2 aja</title>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <link rel=stylesheet href=./more/styles/style.css>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
+    <style>
+      input, textarea, select{
+        padding: 15px;
+        border: 1px solid gainsboro;
+        border-radius: 5px;
+        width: 100%;
+        outline: none;
+        font-family: 'JSfont';
+        background: whitesmoke;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id=header style="
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      height: 100px;
+      align-items: center;
+    ">
+      <div>FF Studio</div>
+      <div style="display: flex;
+        gap:20px;
+        align-items: center;
+      ">
+        <div id=newOrderButton style="
+        padding:20px;
+        border:1px solid gainsboro;
+        border-radius: 5px;
+        cursor: pointer;
+        background: white;
+      ">
+          Pesanan Baru
+        </div>
+        <div style=cursor:pointer; id=buttonsetting>
+          <img src=./more/media/set.png style=width:32px;height:32px;>
+        </div>
+      </div>
+
+    </div>
+    <div id=navigation>
+      <div id=container>
+        <div class=navitems id=dashboardnav>Dashboard</div>
+        <div class=navitems id=tablesnav>Daftar Pesanan</div>
+      </div>
+    </div>
+    <div id=contentAdmin>
+      <div id=dashboard>
+      </div>
+    </div>
+    <div id=toplayer></div>
+  </body>
+  <script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js></script>
+  <script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js></script>
+  <script src=https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script type="text/javascript" src='https://cdn.datatables.net/2.0.0/js/dataTables.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src=./more/scripts/infinity.js></script>
+  <script src=./more/scripts/view.js></script>
+  <script src=./more/scripts/admin.app.js></script>
+</html>
