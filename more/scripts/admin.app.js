@@ -478,10 +478,10 @@ const app = {
 				await firebase.database().ref(`/orders/${this.data.resi}`).set(this.data);
 
 				let message = '';
-				message += 'Hallo Kak '+this.data.name+'.\n\n';
-				message += 'Terimakasih sudah menggunakan layanan kami.\n';
+				message += 'Hallo '+this.data.name+'.\n\n';
+				message += 'Terimakasih sudah menggunakan layanan kami.\n\n';
 				message += 'Nomor Resi: *'+this.data.resi+'*\n\n';
-				message += 'Salam, FfStudio.';
+				message += 'Salam, AutoFocusServiceCamera.';
 				const fonnteResult = await app.sendWaNotif(this.data.number,message);
 				if(!fonnteResult.status)
 					alert(`Gagal Mengirim Pesan WA! ${fonnteResult.reason}`);
@@ -1110,7 +1110,7 @@ const app = {
 
 				let message = '';
 				message += 'Hallo '+this.data.name+'\n\n';
-				message += 'Kami sudah memperbarui data pesanan\n';
+				message += 'Kami sudah memperbarui data pesanan\n\n';
 				message += 'Cek status pesanan kamu,\n\n';
 				message += 'Nomor Resi: *'+this.data.resi+'*\n\n';
 				message += 'Salam, AutoFocusServiceCamera.';
