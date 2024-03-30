@@ -806,7 +806,7 @@ const app = {
 	},
 	async delete(ffid){
 		try{
-			await firebase.database().ref(`/${ffid}`).remove();
+			await firebase.database().ref(`/orders/${ffid}`).remove();
 			alert('Data Berhasil Dihapus!');
 			this.opentablesnav();
 		}catch(e){
