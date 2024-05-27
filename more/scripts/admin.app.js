@@ -1,3 +1,28 @@
+const months = [
+	'Januari',
+	'Februari',
+	'Maret',
+	'April',
+	'Mei',
+	'Juni',
+	'Juli',
+	'Agustus',
+	'September',
+	'Oktober',
+	'November',
+	'Desember'
+];
+const intParser = function(strings){
+	let s = '';
+	for(let i in strings){
+		const char = strings[i];
+		if(!isNaN(char))
+			s += char;
+	}
+	if(!s.length)
+		return false;
+	return Number(s);
+}
 const app = {
 	dashboard:find('#dashboard'),
 	topLayer:find('#toplayer'),
@@ -5,13 +30,7 @@ const app = {
 		const OrderBarChart = makeElement('div',{
 			innerHTML:`
 				<div style=margin-bottom:5px;>
-					# Grafik Pemesanan
-				</div>
-				<div style=margin-bottom:20px;>
-					<select>
-						<option>Sebulan Terakhir</option>
-						<option>Seminggu Terakhir</option>
-					</select>
+					# Grafik Pendapatan
 				</div>
 				<canvas></canvas>
 			`,
@@ -20,43 +39,30 @@ const app = {
 				let data = await firebase.database().ref('/orders').get();
 				data = data.val();
 
-
 				//option sebulan terakhir
 
-				const labels = {};
+				const newLabels = {};
 				for(let i in data){
 					const ts = data[i].resi.slice(4);
-					const date = new Date(Number(ts)).toLocaleDateString();
-					const tsd = Date.parse(date);
-					const now = new Date().getTime();
-					const timelessmonth = now - (3600000 * 24 * 30);
-					if(tsd > timelessmonth){
-						labels[date] = {count:0};
+					const tdate = new Date(Number(ts));
+					const strings = `${months[tdate.getMonth()]} ${tdate.getFullYear()}`;
+					if(newLabels[strings] === undefined){
+						newLabels[strings] = 0;
 					}
+					const price = intParser(data[i].fullprice);
+					newLabels[strings] += price;
 				}
-
-				for(let i in data){
-					const ts = data[i].resi.slice(4);
-					const date = new Date(Number(ts)).toLocaleDateString();
-					if(labels[date]){
-						labels[date].count += 1;
-					}
-				}
-
 				const dataarr = [];
-
-				for(let i in labels){
-					dataarr.push(labels[i].count);
+				for(let i in newLabels){
+					dataarr.push(newLabels[i]);
 				}
-
 				const ctx = this.find('canvas');
-
 			  new Chart(ctx, {
 			    type: 'line',
 			    data: {
-			      labels: Object.keys(labels),
+			      labels: Object.keys(newLabels),
 			      datasets: [{
-			        label: 'Pemesanan',
+			        label: 'Pendapatan',
 			        data: dataarr,
 			        borderWidth: 2
 			      }]
